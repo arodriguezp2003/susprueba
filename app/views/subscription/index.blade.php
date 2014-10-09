@@ -24,25 +24,30 @@
  	 </div>
 
 
-	<h3>Suscripción</h3>
+	<h2>Suscripción</h2>
+	<hr>
 	@if($user->subscribed())
-		<p>Tu Plan es {{$user->stripe_plan}}</p>
+	<div class="panel panel-default">
+	  <div class="panel-heading"><strong>Tu Suscripcion es: {{$user->stripe_plan}}</strong></div>
+	  <div class="panel-body">
 		@if($user->cancelled())
-			<p>Su Suscripción termina el {{ $user->subscription_ends_at->format('D d M Y') }}</p>
+			<div class="alert alert-warning" role="alert">Su Suscripción termina el {{ $user->subscription_ends_at->format('D d M Y') }}</div>
 		@endif
-		<ul>
-			@if(!$user->cancelled())
-			<li><a href="{{ URL::action('subscription-cancel') }}?_token={{ csrf_token() }}">Cancelar Subscripcion</a></li>
-			@else
-			<li><a href="{{URL::action('subscription-resume') }}?_token={{ csrf_token()}}">Seguir con la subscripcion</a></li>
-			@endif
-			@if($user->subscribed())
-				<li><a href="{{URL::action('subscription-card') }}">Actualizar Tarjeta</a></li>
-			@endif
-		</ul>
-	@else
-		<p>Usted Es un Usuario Free!!! <a href="{{ URL::action('subscription-join') }}">Unete Ahora y se Premium!</a></p>
-	@endif
+			<ul>
+				@if(!$user->cancelled())
+				<li><a href="{{ URL::action('subscription-cancel') }}?_token={{ csrf_token() }}">Cancelar Subscripcion</a></li>
+				@else
+				<li><a href="{{URL::action('subscription-resume') }}?_token={{ csrf_token()}}">Seguir con la subscripcion</a></li>
+				@endif
+				@if($user->subscribed())
+					<li><a href="{{URL::action('subscription-card') }}">Actualizar Tarjeta</a></li>
+				@endif
+			</ul>
+		@else
+			<p>Usted Es un Usuario Free!!! <a href="{{ URL::action('subscription-join') }}">Unete Ahora y se Premium!</a></p>
+		@endif
+	 </div>
+	</div>
 @stop
 
 @section("script")

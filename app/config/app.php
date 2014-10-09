@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Laravel\Cashier\CashierServiceProvider',
+		'Arp\Gen\GenServiceProvider',
 
 	),
 

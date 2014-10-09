@@ -62,22 +62,28 @@ Route::filter('auth.basic', function()
 
 Route::filter('not.subscribed',function(){
 	if (Auth::check() && Auth::user()->subscribed()) {
-		Redirect::action('subscription');
+		return Redirect::action('subscription');
 	}
 });
 
 Route::filter('subscribed',function(){
 	if (Auth::check() && !Auth::user()->subscribed()) {
-		Redirect::action('subscription');
+		return Redirect::action('subscription');
 	}
 });
 
 Route::filter('not.cancelled',function(){
-	if (Auth::check() && Auth::user()->cancelled()) {
-		Redirect::action('subscription');
+	if (Auth::check() && !Auth::user()->cancelled()) {
+		 Redirect::action('subscription');
 	}
 });
 
+Route::filter('not.admin',function(){
+	if (Auth::check() && !Auth::user()->admin =="1" ) {
+		return Redirect::action('subscription');
+	}
+	
+});
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

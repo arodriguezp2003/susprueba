@@ -102,7 +102,13 @@ Route::get('login/fb/callback', function() {
 
 
 
-
+Route::group(['prefix'=>'admin','before'=>'not.admin'],function(){
+	Route::get('/',[
+		'as'=>'admin',
+		'uses'=>'DashboardController@getIndex'
+	]);
+	Route::controller('plans','PlansController');
+});
 
 
 
